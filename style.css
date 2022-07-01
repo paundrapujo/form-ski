@@ -1,0 +1,16 @@
+body {
+  background-image: linear-gradient(0deg, #5295fe 0%, #3399ff 100%);
+  font-family: "Poppins", sans-serif;
+  color: #717171;
+}
+
+.card img {
+  max-width: 120px;
+}
+
+.form-control {
+  font-size: 0.8rem;
+}
+div .alert .btn-close {
+  font-size: 10px;
+}

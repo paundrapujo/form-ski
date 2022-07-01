@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulir SKI 2022/2023</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-7">
+          <div class="card p-4 shadow-lg border-0 my-4">
+            <img src="logoski.png" alt="Sie Kerohanian Islam" class="d-block mx-auto" />
+            <h4 class="py-3 text-center">JOIN WITH US!</h4>
+            <div class="alert alert-primary d-none my-alert" role="alert">
+              Terimakasih telah mengisi formulir pendaftaran. Klik link untuk masuk <a href="https://chat.whatsapp.com/K55L4qmceAT95KFaFfSKYH" class="alert-link" target="_blank">ke dalam Grup WhatsApp</a>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <form action="" name="pendaftaran-ski">
+              <div class="form-group mb-3">
+                <input type="text" placeholder="Masukkan Nama Lengkap" class="form-control rounded-pill" name="nama" />
+              </div>
+              <div class="form-group mb-3">
+                <input type="text" placeholder="Masukkan Kelas" class="form-control rounded-pill" name="kelas" />
+              </div>
+              <div class="form-group mb-3">
+                <select class="form-select" aria-label="pilihMajelis" name="majelis">
+                  <option selected>Pilih Majelis Yang Diinginkan</option>
+                  <option value="MAHAR">MAHAR</option>
+                  <option value="MADAK">MADAK</option>
+                  <option value="MATAKAKI">MATAKAKI</option>
+                  <option value="MAKOM">MAKOM</option>
+                  <option value="MANIS">MANIS</option>
+                </select>
+              </div>
+              <div class="form-group mb-3">
+                <textarea class="form-control" id="alasanMajelis" rows="3" placeholder="Alasan saya memilih Majelis ...." name="alasanMajelis"></textarea>
+              </div>
+              <div class="form-group mb-3">
+                <textarea class="form-control" id="alasanSki" rows="3" placeholder="Alasan saya memilih organisasi SKI karena ...." name="alasanSki"></textarea>
+              </div>
+              <div class="form-group d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-kirim">Kirim</button>
+
+                <button class="btn btn-primary btn-loading d-none" type="button" disabled>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Loading...
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/bootstrap.js"></script>
+    <script>
+      const scriptURL = "https://script.google.com/macros/s/AKfycbz26W2Rf0BpgQ4ePi7AxuNlVhPVabPGFchq4I_ul0-V0-vjhNP3i0DiWCzoh48fhPCy/exec";
+      const form = document.forms["pendaftaran-ski"];
+      const btnKirim = document.querySelector(".btn-kirim");
+      const btnLoading = document.querySelector(".btn-loading");
+      const myAlert = document.querySelector(".my-alert");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        // Ketika tombol submit di klik
+        //tampilkan tombol loading, hilangkan tombol kirim
+        btnLoading.classList.toggle("d-none");
+        btnKirim.classList.toggle("d-none");
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => {
+            //tampilkan tombol kirim, hilangkan tombol loading
+            btnLoading.classList.toggle("d-none");
+            btnKirim.classList.toggle("d-none");
+            //tampilkan alert
+            form.reset();
+            myAlert.classList.toggle("d-none");
+            console.log("Success!", response);
+          })
+          .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
+  </body>
+</html>
